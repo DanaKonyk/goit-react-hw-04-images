@@ -9,7 +9,7 @@ const ImageGalleryItem = ({ item }) => {
     console.log('handleModal called');
     setModalShown(prev => !prev);
   };
-  console.log(item);
+
   return (
     <li className={css.galleryItem}>
       <img
