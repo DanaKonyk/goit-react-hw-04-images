@@ -1,34 +1,26 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import css from './ImageGalleryItem.module.css';
 import Modal from '../Modal/Modal';
 
-class ImageGalleryItem extends Component {
-  state = {
-    modalShown: false,
-  };
+const ImageGalleryItem = ({ item }) => {
+  const [modalShown, setModalShown] = useState(false);
 
-  handleOnModalClick = () => {
+  const handleOnModalClick = () => {
     console.log('handleModal called');
-    this.setState(prevState => ({ modalShown: !prevState.modalShown }));
+    setModalShown(prev => !prev);
   };
-
-  render() {
-    const { item } = this.props;
-
-    return (
-      <li className={css.galleryItem}>
-        <img
-          src={item.webformatURL}
-          alt={item.tags}
-          className={css.image}
-          onClick={this.handleOnModalClick}
-        />
-        {this.state.modalShown && (
-          <Modal item={item} onClose={this.handleOnModalClick} />
-        )}
-      </li>
-    );
-  }
-}
+  console.log(item);
+  return (
+    <li className={css.galleryItem}>
+      <img
+        src={item.webformatURL}
+        alt={item.tags}
+        className={css.image}
+        onClick={handleOnModalClick}
+      />
+      {modalShown && <Modal item={item} onClose={handleOnModalClick} />}
+    </li>
+  );
+};
 
 export default ImageGalleryItem;
