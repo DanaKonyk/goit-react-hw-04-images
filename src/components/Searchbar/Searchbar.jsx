@@ -1,47 +1,43 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import css from './Searchbar.module.css';
 import { IoSearch } from 'react-icons/io5';
 
-class Searchbar extends Component {
-  state = {
-    searchData: '',
-  };
+const Searchbar = ({ onSubmit }) => {
+  const [searchData, setSearchData] = useState('');
 
-  handleChange = e => {
+  const handleChange = e => {
     const { value } = e.target;
-    this.setState({ searchData: value.toLowerCase() });
+    setSearchData(value.toLowerCase());
   };
 
-  handleSearch = e => {
+  const handleSearch = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.searchData);
-    this.setState({ searchData: '' });
+    onSubmit(searchData);
+    setSearchData('');
   };
 
-  render() {
-    return (
-      <header className={css.searchbar} onSubmit={this.handleSearch}>
-        <form className={css.form}>
-          <button type="submit" className={css.button}>
-            <span className={css.buttonLabel}>
-              <IoSearch size={25} />
-            </span>
-          </button>
+  return (
+    <header className={css.searchbar} onSubmit={handleSearch}>
+      <form className={css.form}>
+        <button type="submit" className={css.button}>
+          <span className={css.buttonLabel}>
+            <IoSearch size={25} />
+          </span>
+        </button>
 
-          <input
-            className={css.input}
-            type="text"
-            name="searchData"
-            value={this.state.searchData}
-            onChange={this.handleChange}
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-          />
-        </form>
-      </header>
-    );
-  }
-}
+        <input
+          className={css.input}
+          type="text"
+          name="searchData"
+          value={searchData}
+          onChange={handleChange}
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+        />
+      </form>
+    </header>
+  );
+};
 
 export default Searchbar;

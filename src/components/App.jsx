@@ -13,6 +13,8 @@ export const App = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
 
+  console.log(page);
+
   const handleData = useCallback(async () => {
     try {
       setLoading(true);
@@ -41,7 +43,7 @@ export const App = () => {
   const handleSubmit = searchData => {
     setSearchData(searchData);
     setImagesList([]);
-    setPage(page);
+    setPage(1);
   };
 
   const handleNextPage = () => {

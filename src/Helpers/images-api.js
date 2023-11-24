@@ -29,3 +29,4 @@ export async function fetchImages(searchData, page) {
 }
 
 fetchImages();
+
